@@ -25,8 +25,9 @@ const transporter = nodemailer.createTransport({
   },
   connectionTimeout: 15000,
   socketTimeout: 15000,
-  logger: true, // Log to console for better debugging on Railway
-  debug: true
+  logger: true,
+  debug: true,
+  family: 4 // Force IPv4 to avoid ENETUNREACH issues with IPv6 on Railway
 });
 
 // Contact form endpoint
