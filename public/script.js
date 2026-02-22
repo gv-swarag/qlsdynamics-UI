@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initProductTabs();
     initLightbox();
+    initScrollSpy();
 });
 
 /* ---- Lightbox Logic ---- */
@@ -339,4 +340,38 @@ function initProductTabs() {
             });
         });
     });
+}
+
+/* ---- Scroll Spy & Active Glow (Using IntersectionObserver) ---- */
+function initScrollSpy() {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    if (!sections.length || !navLinks.length) return;
+
+    const options = {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: "-10% 0px -40% 0px" // Offset for fixed navbar
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            if (!id) return;
+
+            if (entry.isIntersecting) {
+                // Only update if it's not already the active section
+                if (!entry.target.classList.contains('active-section')) {
+                    sections.forEach(s => s.classList.remove('active-section'));
+                    navLinks.forEach(link => link.classList.remove('active'));
+
+                    entry.target.classList.add('active-section');
+                    const activeNavLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                    if (activeNavLink) activeNavLink.classList.add('active');
+                }
+            }
+        });
+    }, options);
+
+    sections.forEach(section => observer.observe(section));
 }
