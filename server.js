@@ -84,9 +84,9 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// Serve index.html for all routes (SPA)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Redirect unknown routes back to the home page
+app.use((req, res) => {
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {

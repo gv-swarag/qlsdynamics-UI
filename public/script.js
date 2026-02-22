@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initMobileMenu();
     initCounters();
-    initContactForm();
     initProductTabs();
+    handleTabDeepLinks();
+    initContactForm();
     initLightbox();
     initScrollSpy();
     initCustomSelect();
@@ -247,15 +248,19 @@ function initNavbar() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const navHeight = document.querySelector('.navbar').offsetHeight;
-                const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-                window.scrollTo({ top, behavior: 'smooth' });
+            // Only handle internal transitions for the same page
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                    window.scrollTo({ top, behavior: 'smooth' });
 
-                document.querySelector('.nav-links')?.classList.remove('open');
-                document.querySelector('.hamburger')?.classList.remove('active');
+                    document.querySelector('.nav-links')?.classList.remove('open');
+                    document.querySelector('.hamburger')?.classList.remove('active');
+                }
             }
         });
     });
@@ -430,19 +435,47 @@ function initProductTabs() {
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const target = tab.dataset.tab;
-
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            categories.forEach(cat => {
-                if (cat.id === `tab-${target}`) {
-                    cat.classList.add('active');
-                } else {
-                    cat.classList.remove('active');
-                }
-            });
+            activateTargetTab(target);
         });
     });
+}
+
+function activateTargetTab(target) {
+    const tabs = document.querySelectorAll('.product-tab');
+    const categories = document.querySelectorAll('.product-category');
+
+    tabs.forEach(t => {
+        if (t.dataset.tab === target) {
+            t.classList.add('active');
+        } else {
+            t.classList.remove('active');
+        }
+    });
+
+    categories.forEach(cat => {
+        if (cat.id === `tab-${target}`) {
+            cat.classList.add('active');
+        } else {
+            cat.classList.remove('active');
+        }
+    });
+}
+
+function handleTabDeepLinks() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    if (tab) {
+        activateTargetTab(tab);
+        // Also scroll to tabs section if on surveillance page
+        const tabSection = document.querySelector('.product-tabs');
+        if (tabSection) {
+            setTimeout(() => {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const top = tabSection.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }, 500);
+        }
+    }
 }
 
 /* ---- Scroll Spy & Active Glow (Using IntersectionObserver) ---- */
