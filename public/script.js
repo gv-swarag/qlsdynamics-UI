@@ -13,7 +13,72 @@ document.addEventListener('DOMContentLoaded', () => {
     initProductTabs();
     initLightbox();
     initScrollSpy();
+    initCustomSelect();
 });
+
+/* ---- Custom Multi-Select Logic ---- */
+function initCustomSelect() {
+    const customSelect = document.getElementById('interest-select');
+    if (!customSelect) return;
+
+    const trigger = customSelect.querySelector('.select-trigger');
+    const optionsContainer = customSelect.querySelector('.select-options');
+    const checkboxes = customSelect.querySelectorAll('input[type="checkbox"]');
+    const placeholder = customSelect.querySelector('.placeholder');
+    const selectedText = customSelect.querySelector('.selected-text');
+    const hiddenInput = document.getElementById('interest-hidden');
+
+    if (!trigger || !hiddenInput) return;
+
+    // Toggle dropdown
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        customSelect.classList.toggle('active');
+    });
+
+    // Handle checkbox changes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateSelectedDisplay();
+        });
+    });
+
+    function updateSelectedDisplay() {
+        const selectedItems = Array.from(checkboxes)
+            .filter(i => i.checked);
+
+        const selectedLabels = selectedItems.map(i => i.nextElementSibling.textContent.trim());
+        const selectedValues = selectedItems.map(i => i.value);
+
+        hiddenInput.value = selectedValues.join(',');
+
+        if (selectedLabels.length > 0) {
+            placeholder.style.display = 'none';
+            selectedText.style.display = 'block';
+            selectedText.textContent = selectedLabels.length === 1
+                ? selectedLabels[0]
+                : `${selectedLabels.length} solutions selected`;
+        } else {
+            placeholder.style.display = 'block';
+            selectedText.style.display = 'none';
+        }
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!customSelect.contains(e.target)) {
+            customSelect.classList.remove('active');
+        }
+    });
+
+    // Reset support
+    const form = customSelect.closest('form');
+    if (form) {
+        form.addEventListener('reset', () => {
+            setTimeout(updateSelectedDisplay, 0);
+        });
+    }
+}
 
 /* ---- Lightbox Logic ---- */
 function initLightbox() {
@@ -44,6 +109,7 @@ function initLightbox() {
     };
 
     // Close when clicking anywhere on the lightbox
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', closeLightbox);
 
     // ESC key to close
@@ -67,6 +133,7 @@ function initParticleCanvas() {
         height = canvas.height = window.innerHeight;
     }
 
+    resize();
     mouse = { x: width / 2, y: height / 2 };
 
     window.addEventListener('mousemove', (e) => {
@@ -92,31 +159,30 @@ function initParticleCanvas() {
             this.x += this.speedX;
             this.y += this.speedY;
 
-            // Subtle mouse attraction
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 200) {
-                this.x += dx * 0.001;
-                this.y += dy * 0.001;
+            if (dist < 150) {
+                this.x -= dx * 0.01;
+                this.y -= dy * 0.01;
             }
 
-            if (this.x < 0 || this.x > width) this.speedX *= -1;
-            if (this.y < 0 || this.y > height) this.speedY *= -1;
+            if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                this.reset();
+            }
         }
 
         draw() {
+            ctx.fillStyle = `rgba(0, 240, 255, ${this.opacity})`;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 240, 255, ${this.opacity})`;
             ctx.fill();
         }
     }
 
     function init() {
-        resize();
-        const count = Math.min(Math.floor((width * height) / 8000), 150);
         particles = [];
+        const count = Math.min(Math.floor((width * height) / 8000), 150);
         for (let i = 0; i < count; i++) {
             particles.push(new Particle());
         }
@@ -130,12 +196,11 @@ function initParticleCanvas() {
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
                 if (dist < 120) {
-                    const opacity = (1 - dist / 120) * 0.15;
+                    ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0, 240, 255, ${opacity})`;
-                    ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
             }
@@ -144,7 +209,6 @@ function initParticleCanvas() {
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
-
         particles.forEach(p => {
             p.update();
             p.draw();
@@ -159,7 +223,6 @@ function initParticleCanvas() {
 
     window.addEventListener('resize', () => {
         resize();
-        // Adjust particle count on resize
         const count = Math.min(Math.floor((width * height) / 8000), 150);
         while (particles.length < count) particles.push(new Particle());
         while (particles.length > count) particles.pop();
@@ -191,7 +254,6 @@ function initSmoothScroll() {
                 const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
                 window.scrollTo({ top, behavior: 'smooth' });
 
-                // Close mobile menu if open
                 document.querySelector('.nav-links')?.classList.remove('open');
                 document.querySelector('.hamburger')?.classList.remove('active');
             }
@@ -254,7 +316,7 @@ function animateCounter(el) {
 
     function update(now) {
         const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.floor(eased * target);
         el.textContent = prefix + current + suffix;
 
@@ -305,7 +367,6 @@ function initContactForm() {
         }
     });
 
-    // Reset form functionality
     const resetBtn = document.getElementById('btn-reset-form');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
@@ -326,11 +387,9 @@ function initProductTabs() {
         tab.addEventListener('click', () => {
             const target = tab.dataset.tab;
 
-            // Update active tab
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            // Update active category
             categories.forEach(cat => {
                 if (cat.id === `tab-${target}`) {
                     cat.classList.add('active');
@@ -350,8 +409,8 @@ function initScrollSpy() {
     if (!sections.length || !navLinks.length) return;
 
     const options = {
-        threshold: 0.3, // Trigger when 30% of the section is visible
-        rootMargin: "-10% 0px -40% 0px" // Offset for fixed navbar
+        threshold: 0.3,
+        rootMargin: "-10% 0px -40% 0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -360,7 +419,6 @@ function initScrollSpy() {
             if (!id) return;
 
             if (entry.isIntersecting) {
-                // Only update if it's not already the active section
                 if (!entry.target.classList.contains('active-section')) {
                     sections.forEach(s => s.classList.remove('active-section'));
                     navLinks.forEach(link => link.classList.remove('active'));

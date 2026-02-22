@@ -655,18 +655,32 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="interest">Interested In</label>
-                <select id="interest" name="interest">
-                  <option value="" disabled selected>Select a solution</option>
-                  <option value="sirius">Sirius — AI Surveillance Camera</option>
-                  <option value="frs">Face Recognition System</option>
-                  <option value="object-detection">Object Detection</option>
-                  <option value="tripwire">Trip Wire Technology</option>
-                  <option value="camera-health">Camera Health Kit</option>
-                  <option value="soc">Surveillance Operations Center</option>
-                  <option value="networking">Networking & Firewall</option>
-                  <option value="other">Other</option>
-                </select>
+                <label>Interested In</label>
+                <div class="custom-select" id="interest-select">
+                  <div class="select-trigger">
+                    <span class="placeholder">Select solutions</span>
+                    <span class="selected-text" style="display: none;"></span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="select-options">
+                    <label class="option-item"><input type="checkbox" value="sirius"> <span>Sirius — AI Surveillance
+                        Camera</span></label>
+                    <label class="option-item"><input type="checkbox" value="frs"> <span>Face Recognition
+                        System</span></label>
+                    <label class="option-item"><input type="checkbox" value="object-detection"> <span>Object
+                        Detection</span></label>
+                    <label class="option-item"><input type="checkbox" value="tripwire"> <span>Trip Wire
+                        Technology</span></label>
+                    <label class="option-item"><input type="checkbox" value="camera-health"> <span>Camera Health
+                        Kit</span></label>
+                    <label class="option-item"><input type="checkbox" value="soc"> <span>Surveillance Operations
+                        Center</span></label>
+                    <label class="option-item"><input type="checkbox" value="networking"> <span>Networking &
+                        Firewall</span></label>
+                    <label class="option-item"><input type="checkbox" value="other"> <span>Other</span></label>
+                  </div>
+                  <input type="hidden" name="interest" id="interest-hidden">
+                </div>
               </div>
               <div class="form-group">
                 <label for="message">Message</label>
