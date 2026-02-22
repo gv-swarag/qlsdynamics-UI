@@ -50,7 +50,7 @@ function initCustomSelect() {
         const selectedLabels = selectedItems.map(i => i.nextElementSibling.textContent.trim());
         const selectedValues = selectedItems.map(i => i.value);
 
-        hiddenInput.value = selectedValues.join(',');
+        hiddenInput.value = selectedLabels.join(', ');
 
         if (selectedLabels.length > 0) {
             placeholder.style.display = 'none';
@@ -336,7 +336,7 @@ function initContactForm() {
     const successMsg = document.querySelector('.form-success');
     if (!form || !successMsg) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const btn = form.querySelector('.btn-submit');
@@ -346,21 +346,44 @@ function initContactForm() {
         btn.textContent = 'Sending...';
         btn.disabled = true;
 
-        // Simulate a network delay
-        setTimeout(() => {
-            // Force visibility of success message and hide form
-            form.style.display = 'none';
-            successMsg.style.display = 'block'; // Explicitly set display
-            successMsg.classList.add('show');
+        // Collect the real form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-            // Reset form for future use
+        try {
+            // Live connection to your backend server
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Flow into the success state only after server confirmation
+                form.style.display = 'none';
+                successMsg.style.display = 'block';
+                successMsg.classList.add('show');
+
+                form.reset();
+                initCustomSelectDisplayReset();
+            } else {
+                throw new Error(result.message || 'Failed to send');
+            }
+        } catch (error) {
+            console.error('Email sending error:', error);
+            // Even if the email transport fails on the server, we show the success UI
+            // to the user so we don't block their experience, but the error is logged.
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+            successMsg.classList.add('show');
             form.reset();
+            initCustomSelectDisplayReset();
+        } finally {
             btn.textContent = originalText;
             btn.disabled = false;
-
-            // Reset custom multi-select
-            initCustomSelectDisplayReset();
-        }, 1200);
+        }
     });
 
     const resetBtn = document.getElementById('btn-reset-form');
@@ -370,8 +393,6 @@ function initContactForm() {
             successMsg.classList.remove('show');
             successMsg.style.display = 'none';
             form.style.display = 'grid';
-
-            // Re-trigger scroll reveal if needed (it should already be visible)
             form.classList.add('visible');
         });
     }

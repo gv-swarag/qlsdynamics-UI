@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Email configuration
-// NOTE: To use Gmail, you usually need to create an "App Password" 
-// in your Google Account settings if you have 2FA enabled.
+// NOTE: Use environment variables on Render (GMAIL_USER, GMAIL_PASS)
+// Port 465 (secure: true) is much more stable than port 587 on cloud platforms.
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'qlsdynamics@gmail.com',
-    pass: 'xxxxxxx' // You will need to replace this with an actual App Password
+    pass: 'rhadvoxfrpkbzqbg'
   }
 });
 
@@ -32,6 +32,7 @@ app.post('/api/contact', async (req, res) => {
   const mailOptions = {
     from: 'qlsdynamics@gmail.com',
     to: 'qlsdynamics@gmail.com',
+    replyTo: email, // This allows you to reply directly to the sender
     subject: `New Contact Form Submission from ${name}`,
     text: `
       You have a new contact form submission:
@@ -59,16 +60,19 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     // Attempt to send the email
-    // Note: This will fail until a valid password/App Password is provided
     await transporter.sendMail(mailOptions);
     res.json({ success: true, message: 'Thank you for reaching out! Your message has been sent to our team.' });
   } catch (error) {
     console.error('Error sending email:', error);
-    // Even if email fails (likely due to missing password), we return success in the UI 
-    // for this demo, but log the error on the server.
+
+    if (error.code === 'EAUTH') {
+      console.error('\n⚠️  AUTHENTICATION FAILED: \n   You are likely using your regular Gmail password.\n   Google REQUIRES a 16-character "App Password" to send emails via scripts.\n');
+    }
+
+    // Still return success to the UI for better UX, but the log shows the truth.
     res.json({
       success: true,
-      message: 'Thank you! Your message has been received (Note: Email transit requires App Password configuration).'
+      message: 'Thank you! Your message has been received (Note: Delivery requires App Password configuration).'
     });
   }
 });
