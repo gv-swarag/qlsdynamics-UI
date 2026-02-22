@@ -90,7 +90,7 @@ img {
 
 /* ---- Section Base ---- */
 .section {
-  padding: 120px 0;
+  padding: 100px 0;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   overflow: hidden;
@@ -145,35 +145,37 @@ img {
 
 /* Consolidate the top line glow into active-section for all sections */
 .section.active-section::before {
-  opacity: 0.5;
+  opacity: 0.7;
   transform: translateX(-50%) scaleX(1);
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 45px rgba(0, 240, 255, 0.4);
 }
 
 /* Even stronger for highlighted sections */
 .section-highlight.active-section::before {
-  height: 2px;
-  opacity: 0.8;
+  height: 2.5px;
+  opacity: 1;
   background: linear-gradient(90deg,
       transparent 0%,
       var(--accent-cyan) 50%,
       transparent 100%);
-  box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
-  animation: glowPulseSoft 4s infinite alternate;
+  box-shadow: 0 0 60px rgba(0, 240, 255, 0.6);
+  animation: glowPulseSoft 3s infinite alternate;
 }
 
 @keyframes glowPulseSoft {
   0% {
-    opacity: 0.4;
+    opacity: 0.5;
+    filter: brightness(1);
   }
 
   100% {
-    opacity: 0.8;
+    opacity: 1;
+    filter: brightness(1.5);
   }
 }
 
 .section-highlight.active-section {
-  background: radial-gradient(circle at 50% 15%, rgba(0, 240, 255, 0.2) 0%, transparent 85%);
+  background: radial-gradient(circle at 50% 12%, rgba(0, 240, 255, 0.25) 0%, transparent 80%);
 }
 
 .section-highlight .container {
@@ -229,17 +231,17 @@ img {
 /* Active Section Highlighting — Premium Glow */
 .section.active-section .section-title {
   color: var(--text-white);
-  text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
-  transform: translateY(-5px);
-  transition: transform 1s ease, text-shadow 1s ease;
+  text-shadow: 0 0 40px rgba(0, 240, 255, 0.5), 0 0 100px rgba(0, 240, 255, 0.2);
+  transform: translateY(-8px);
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), text-shadow 1.2s ease;
   will-change: transform;
 }
 
 .section.active-section .section-label {
-  letter-spacing: 12px;
+  letter-spacing: 14px;
   color: var(--accent-cyan);
-  filter: drop-shadow(0 0 15px rgba(0, 240, 255, 1));
-  transition: letter-spacing 1.2s cubic-bezier(0.2, 0.8, 0.3, 1), filter 1.2s ease;
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 1));
+  transition: letter-spacing 1.5s cubic-bezier(0.2, 0.8, 0.3, 1), filter 1.5s ease;
 }
 
 .section.active-section .container {
@@ -385,7 +387,7 @@ img {
 
 /* ---- Hero ---- */
 .hero {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -757,6 +759,7 @@ img {
 /* ---- About Section ---- */
 .about {
   background: var(--bg-secondary);
+  padding-top: 60px;
 }
 
 .about-grid {
@@ -882,6 +885,162 @@ img {
   transform: translateX(5px);
 }
 
+/* ---- Solutions Hub ---- */
+.solutions.section {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+}
+
+.solutions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.solutions-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.solutions .about-metrics {
+  margin-top: 40px;
+}
+
+/* ---- About Simple Visual ---- */
+.about-visual-simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-glass-brand {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 40px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  transition: var(--transition-slow);
+}
+
+.about-glass-brand:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
+}
+
+.brand-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  background: var(--accent-gradient);
+  filter: blur(80px);
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.floating-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+  animation: float 6s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  cursor: zoom-in;
+}
+
+.brand-stats-row {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.mini-stat {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-stat span {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Scanner Animation for Solutions Hub Entrance */
+.solutions-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 20px var(--accent-cyan);
+  opacity: 0;
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
 .about-text .section-desc {
   margin-bottom: 32px;
 }
@@ -912,7 +1071,6 @@ img {
 }
 
 .about-feature-item h4 {
-  font-size: 1rem;
   font-weight: 600;
   color: var(--text-white);
   margin-bottom: 4px;
@@ -922,6 +1080,12 @@ img {
   font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+.about-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
 }
 
 /* ---- Products Section ---- */
@@ -1824,10 +1988,10 @@ img {
 /* ---- Scroll Reveal ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(40px) scale(0.98);
+  transform: translateY(50px) scale(0.97);
   transition:
-    opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform, opacity;
 }
 
@@ -1950,6 +2114,16 @@ img {
     gap: 20px;
   }
 
+  .about-actions {
+    flex-direction: column;
+  }
+
+  .about-actions .btn-primary,
+  .about-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
   .products-grid {
     grid-template-columns: 1fr;
   }
@@ -1994,7 +2168,34 @@ img {
   }
 
   .about-metrics {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .metric-box {
+    padding: 24px 16px;
+  }
+
+  .metric-box .metric-value {
+    font-size: 1.8rem;
+  }
+
+  .metric-box .metric-label {
+    font-size: 1rem;
+  }
+
+  .metric-box .metric-desc {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .metric-box .metric-cta {
+    font-size: 0.7rem;
   }
 }
 

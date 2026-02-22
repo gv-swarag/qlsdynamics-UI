@@ -86,7 +86,7 @@ function initLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
-    const zoomableImages = document.querySelectorAll('.feature-image-wrapper img, .product-img-container img');
+    const zoomableImages = document.querySelectorAll('.feature-image-wrapper img, .product-img-container img, .floating-logo');
 
     if (!lightbox || !lightboxImg || !zoomableImages.length) return;
 
