@@ -1416,12 +1416,63 @@ img {
   margin-bottom: 20px;
 }
 
-.form-group label {
+/* ---- Feature Lists Refinement ---- */
+.product-features {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.product-features li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.product-features li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-cyan);
+  font-weight: bold;
+}
+
+.feature-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature-head {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 700;
+  color: var(--text-white);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.feature-info {
+  display: block;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .product-features li {
+    margin-bottom: 20px;
+  }
+
+  .feature-head {
+    font-size: 0.9rem;
+  }
+
+  .feature-info {
+    font-size: 0.82rem;
+  }
 }
 
 .form-group input,
