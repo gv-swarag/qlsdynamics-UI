@@ -16,11 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 // NOTE: Use environment variables on Render (GMAIL_USER, GMAIL_PASS)
 // Port 465 (secure: true) is much more stable than port 587 on cloud platforms.
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: 'qlsdynamics@gmail.com',
-    pass: 'rhadvoxfrpkbzqbg'
-  }
+    user: process.env.GMAIL_USER || 'qlsdynamics@gmail.com',
+    pass: process.env.GMAIL_PASS || 'rhadvoxfrpkbzqbg'
+  },
+  connectionTimeout: 15000, // 15 seconds
+  socketTimeout: 15000
 });
 
 // Contact form endpoint

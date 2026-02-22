@@ -351,12 +351,19 @@ function initContactForm() {
         const data = Object.fromEntries(formData.entries());
 
         try {
+            // Add a timeout to prevent the form from getting "stuck"
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 second timeout
+
             // Live connection to your backend server
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
 
             const result = await response.json();
 
