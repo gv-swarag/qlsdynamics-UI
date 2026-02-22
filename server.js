@@ -17,17 +17,16 @@ app.use(express.urlencoded({ extended: true }));
 // Port 465 (secure: true) is much more stable than port 587 on cloud platforms.
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true, // Port 465 uses SSL/TLS
   auth: {
     user: process.env.GMAIL_USER || 'qlsdynamics@gmail.com',
     pass: process.env.GMAIL_PASS || 'rhadvoxfrpkbzqbg'
   },
-  tls: {
-    rejectUnauthorized: false
-  },
-  connectionTimeout: 30000,
-  socketTimeout: 30000
+  connectionTimeout: 15000,
+  socketTimeout: 15000,
+  logger: true, // Log to console for better debugging on Railway
+  debug: true
 });
 
 // Contact form endpoint
