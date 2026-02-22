@@ -1679,6 +1679,39 @@ img {
   line-height: 1.6;
 }
 
+.feature-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(0, 240, 255, 0.08);
+  border-left: 2px solid var(--accent-cyan);
+  border-radius: 8px;
+  margin: 12px 0;
+  max-width: 650px;
+}
+
+.feature-tip p {
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  line-height: 1.5;
+  margin: 0 !important;
+  font-weight: 500;
+}
+
+.feature-tip .tip-icon {
+  font-size: 1.1rem;
+}
+
+.feature-alert-note {
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-weight: 500;
+  margin-top: 12px;
+  max-width: 650px;
+  display: block;
+}
+
 @media (max-width: 768px) {
   .product-features li {
     margin-bottom: 20px;
