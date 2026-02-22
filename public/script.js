@@ -333,47 +333,63 @@ function animateCounter(el) {
 /* ---- Contact Form ---- */
 function initContactForm() {
     const form = document.getElementById('contact-form');
-    if (!form) return;
+    const successMsg = document.querySelector('.form-success');
+    if (!form || !successMsg) return;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const btn = form.querySelector('.btn-submit');
+        if (!btn) return;
+
         const originalText = btn.textContent;
         btn.textContent = 'Sending...';
         btn.disabled = true;
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        // Simulate a network delay
+        setTimeout(() => {
+            // Force visibility of success message and hide form
+            form.style.display = 'none';
+            successMsg.style.display = 'block'; // Explicitly set display
+            successMsg.classList.add('show');
 
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (res.ok) {
-                form.style.display = 'none';
-                document.querySelector('.form-success').classList.add('show');
-                form.reset();
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        } catch (err) {
-            console.error('Form submission error:', err);
+            // Reset form for future use
+            form.reset();
             btn.textContent = originalText;
             btn.disabled = false;
-        }
+
+            // Reset custom multi-select
+            initCustomSelectDisplayReset();
+        }, 1200);
     });
 
     const resetBtn = document.getElementById('btn-reset-form');
     if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-            document.querySelector('.form-success').classList.remove('show');
+        resetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            successMsg.classList.remove('show');
+            successMsg.style.display = 'none';
             form.style.display = 'grid';
+
+            // Re-trigger scroll reveal if needed (it should already be visible)
+            form.classList.add('visible');
         });
     }
+}
+
+function initCustomSelectDisplayReset() {
+    const placeholder = document.querySelector('#interest-select .placeholder');
+    const selectedText = document.querySelector('#interest-select .selected-text');
+    const hiddenInput = document.getElementById('interest-hidden');
+    const checkboxes = document.querySelectorAll('#interest-select input[type="checkbox"]');
+
+    if (placeholder) placeholder.style.display = 'block';
+    if (selectedText) {
+        selectedText.style.display = 'none';
+        selectedText.textContent = '';
+    }
+    if (hiddenInput) hiddenInput.value = '';
+    checkboxes.forEach(cb => cb.checked = false);
 }
 
 /* ---- Product Tabs ---- */
