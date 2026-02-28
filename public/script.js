@@ -86,7 +86,7 @@ function initLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
-    const zoomableImages = document.querySelectorAll('.feature-image-wrapper img, .product-img-container img, .floating-logo');
+    const zoomableImages = document.querySelectorAll('.feature-image-wrapper img, .product-img-container img');
 
     if (!lightbox || !lightboxImg || !zoomableImages.length) return;
 
@@ -235,13 +235,16 @@ function initNavbar() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 60) {
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on load
 }
 
 /* ---- Smooth Scrolling ---- */
@@ -509,4 +512,16 @@ function initScrollSpy() {
     }, options);
 
     sections.forEach(section => observer.observe(section));
+
+    // Auto-activate the first section-highlight on page load for subpages
+    // This ensures the glow + reveal effects trigger immediately
+    setTimeout(() => {
+        const hasActive = document.querySelector('.section.active-section');
+        if (!hasActive) {
+            const firstHighlight = document.querySelector('.section-highlight');
+            if (firstHighlight) {
+                firstHighlight.classList.add('active-section');
+            }
+        }
+    }, 300);
 }

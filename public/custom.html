@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <div class="tech-grid-overlay"></div>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
@@ -40,7 +41,7 @@
     <!-- ===== BACK TO HOME ===== -->
     <div class="back-to-home">
         <div class="container">
-            <a href="/" class="back-home-link">
+            <a href="/#about" class="back-home-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="m12 19-7-7 7-7" />
@@ -54,9 +55,9 @@
     <!-- ===== CUSTOMER BASED REQUIREMENTS ===== -->
     <section class="section section-highlight" id="custom">
         <div class="container">
-            <div class="reveal">
+            <div class="reveal reveal-up">
                 <span class="section-label">Tailored Solutions</span>
-                <h2 class="section-title">Custom Requirements</h2>
+                <h2 class="section-title">Custom <span class="gradient-text">Requirements</span></h2>
                 <p class="section-desc">
                     Beyond our standard products, we provide custom AI solutions tailored to
                     specific operational needs and safety conditions.
@@ -65,41 +66,47 @@
 
             <div class="products-grid" style="margin-top: 48px;">
                 <!-- Drone Solutions -->
-                <div class="product-card reveal reveal-delay-1 highlight-card" style="display: block;">
+                <div class="product-card reveal reveal-scale reveal-delay-1 highlight-card"
+                    style="display: block; grid-column: 1 / -1; width: 100%;">
                     <div class="product-content-wrap">
                         <div class="product-icon">🚁</div>
                         <h3>Drone-Based Intelligence</h3>
-                        <ul class="product-features"
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Drone Health Monitor</span>
-                                    <span class="feature-info">AI-controlled drones verify physical system damage
-                                        autonomously</span>
+                        <div class="feature-row"
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 40px; justify-items: center;">
+                            <div class="feature-item">
+                                <h4 style="color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 8px;">Drone
+                                    Health Monitor</h4>
+                                <p style="margin-bottom: 16px; opacity: 0.9; font-size: 0.95rem; min-height: 60px;">AI
+                                    drones verify physical damage autonomously, ensuring 100% hardware reliability.</p>
+                                <div class="feature-image-wrapper">
+                                    <img src="/images/drone_inspection.png" alt="Drone Health Monitor"
+                                        class="card-image-sm"
+                                        style="object-fit: contain !important; background: rgba(0,0,0,0.2);">
                                 </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Crowd Monitoring</span>
-                                    <span class="feature-info">Automated drone deployment triggered by real-time AI
-                                        activity alerts</span>
-                                    <div class="feature-image-wrapper" style="margin-top: 16px;">
-                                        <img src="/images/drone-crowd.png" alt="Crowd monitoring drone view">
-                                    </div>
+                            </div>
+                            <div class="feature-item">
+                                <h4 style="color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 8px;">Crowd
+                                    Monitoring</h4>
+                                <p style="margin-bottom: 16px; opacity: 0.9; font-size: 0.95rem; min-height: 60px;">
+                                    Automated drone deployment triggered by AI alerts for aerial situational awareness.
+                                </p>
+                                <div class="feature-image-wrapper">
+                                    <img src="/images/drone-crowd.png" alt="Crowd Monitoring" class="card-image-sm"
+                                        style="object-fit: contain !important; background: rgba(0,0,0,0.2);">
                                 </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Fence Line Monitoring</span>
-                                    <span class="feature-info">Integrates an AI scheduler for automated, high-precision
-                                        perimeter
-                                        reports</span>
-                                    <div class="feature-image-wrapper" style="margin-top: 16px;">
-                                        <img src="/images/drone-fence.png" alt="Fence monitoring drone view">
-                                    </div>
+                            </div>
+                            <div class="feature-item">
+                                <h4 style="color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 8px;">Fence Line
+                                    Monitoring</h4>
+                                <p style="margin-bottom: 16px; opacity: 0.9; font-size: 0.95rem; min-height: 60px;">AI
+                                    scheduler for automatic, high-precision perimeter reports and robotic monitoring.
+                                </p>
+                                <div class="feature-image-wrapper">
+                                    <img src="/images/drone-fence.png" alt="Fence Line Monitoring" class="card-image-sm"
+                                        style="object-fit: contain !important; background: rgba(0,0,0,0.2); transform: scale(1.15);">
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -113,122 +120,28 @@
                                 <div class="feature-block">
                                     <span class="feature-head">Super Resolution</span>
                                     <span class="feature-info">AI-driven upscaling of face crops for significantly
-                                        improved recognition
-                                        accuracy</span>
+                                        improved recognition accuracy</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="feature-block">
                                     <span class="feature-head">Person Search</span>
-                                    <span class="feature-info">Rapidly identify and locate persons of interest across
-                                        your entire camera
-                                        network</span>
+                                    <span class="feature-info">Interactive AI tool to search specifically for a person
+                                        based on descriptions or clothing</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="feature-block">
-                                    <span class="feature-head">Live-Tracking</span>
-                                    <span class="feature-info">Intelligent real-time tracking of unauthorized
-                                        individuals across multiple
-                                        zones</span>
+                                    <span class="feature-head">Area Analytics</span>
+                                    <span class="feature-info">Custom heatmaps and flow analysis for retail, public
+                                        squares, and construction sites</span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Activity Heat Maps</span>
-                                    <span class="feature-info">Visual synthesis of human activity and crowd density for
-                                        spatial
-                                        optimization</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Flow Analysis</span>
-                                    <span class="feature-info">Precise entry/exit and flow rate analysis specifically
-                                        for restricted
-                                        zones</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Incident & Threat Management -->
-                <div class="product-card reveal reveal-delay-3 highlight-card">
-                    <div class="product-content-wrap">
-                        <div class="product-icon">⚠️</div>
-                        <h3>Threat Handling</h3>
-                        <ul class="product-features">
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Weapon & Disaster Detection</span>
-                                    <span class="feature-info">Advanced models optimized for detecting fire, weapons,
-                                        and smoke in
-                                        seconds</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Guard Protocol Integration</span>
-                                    <span class="feature-info">Direct automated links to hand-held devices for frontline
-                                        security
-                                        personnel</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Evidence Storage</span>
-                                    <span class="feature-info">Automatic backup of critical incident clips for legal and
-                                        corporate
-                                        compliance</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Multi-Factor ID</span>
-                                    <span class="feature-info">Redundant identification using face, gait, and clothing
-                                        analysis</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Specialized Modules -->
-                <div class="product-card reveal reveal-delay-1 highlight-card">
-                    <div class="product-content-wrap">
-                        <div class="product-icon">📋</div>
-                        <h3>Specialized Requirements</h3>
-                        <ul class="product-features">
                             <li>
                                 <div class="feature-block">
                                     <span class="feature-head">DTE (Time Estimator)</span>
                                     <span class="feature-info">Predictive wait time calculations using real-time crowd
                                         flow trends</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">LLB (Latency Broadcast)</span>
-                                    <span class="feature-info">Scalable architecture for lag-free 4K monitoring across
-                                        global
-                                        networks</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">Area Dwell Analysis</span>
-                                    <span class="feature-info">Automated alerts for excessive loitering or lingering in
-                                        restricted
-                                        zones</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-block">
-                                    <span class="feature-head">AI-Powered Q&A</span>
-                                    <span class="feature-info">Natural language queries for historical searches (e.g.,
-                                        "Find blue
-                                        truck")</span>
                                 </div>
                             </li>
                         </ul>
@@ -245,36 +158,46 @@
                                 <div class="feature-block">
                                     <span class="feature-head">Historical Data (AI NVR)</span>
                                     <span class="feature-info">Simplified data retrieval architecture without
-                                        traditional NVR hardware
-                                        constraints</span>
+                                        traditional NVR hardware constraints</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="feature-block">
                                     <span class="feature-head">Data Gold Mine</span>
                                     <span class="feature-info">Reusable documentation for intelligent querying and
-                                        continuous workflow
-                                        refinement</span>
+                                        continuous workflow refinement</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="feature-block">
                                     <span class="feature-head">AI Models Training</span>
                                     <span class="feature-info">Customer-specific models with automated updates for
-                                        maximum identification
-                                        accuracy</span>
+                                        maximum identification accuracy</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="feature-block">
                                     <span class="feature-head">Tailored Processes</span>
                                     <span class="feature-info">Specific AI workflows designed intentionally for unique
-                                        client operational
-                                        needs</span>
+                                        client operational needs</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
+                </div>
+
+                <!-- Strategic Consultation -->
+                <div class="product-card reveal reveal-delay-2">
+                    <div class="product-icon">🤝</div>
+                    <h3>Strategic Consultation</h3>
+                    <p>Expert advisory services to design and optimize your surveillance strategy.</p>
+                    <ul class="product-features">
+                        <li>Comprehensive security audits and vulnerability assessments</li>
+                        <li>Design of customized AI surveillance architecture</li>
+                        <li>Operational workflow optimization and SOP development</li>
+                        <li>Regular system performance reviews and recommendations</li>
+                        <li>Dedicated account management and technical support</li>
+                    </ul>
                 </div>
             </div>
         </div>

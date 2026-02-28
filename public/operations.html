@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <div class="tech-grid-overlay"></div>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
@@ -40,7 +41,7 @@
     <!-- ===== BACK TO HOME ===== -->
     <div class="back-to-home">
         <div class="container">
-            <a href="/" class="back-home-link">
+            <a href="/#about" class="back-home-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="m12 19-7-7 7-7" />
@@ -52,20 +53,19 @@
     </div>
 
     <!-- ===== SURVEILLANCE OPERATIONS ===== -->
-    <section class="section" id="operations">
+    <section class="section section-highlight" id="operations">
         <div class="container">
-            <div class="reveal">
+            <div class="reveal reveal-up">
                 <span class="section-label">Operations & Monitoring</span>
-                <h2 class="section-title">Surveillance Operations Center</h2>
+                <h2 class="section-title">Surveillance <span class="gradient-text">Operations Center</span></h2>
                 <p class="section-desc">
                     End-to-end surveillance operations ranging from real-time threat detection
                     to agent workflows, performance tracking, and metrics reporting.
                 </p>
             </div>
-
             <div class="products-grid" style="margin-top: 48px;">
                 <!-- SOC -->
-                <div class="product-card reveal reveal-delay-1">
+                <div class="product-card reveal reveal-left reveal-delay-1">
                     <div class="product-icon">🖥️</div>
                     <h3>Surveillance Operations Center (SOC)</h3>
                     <ul class="product-features">
@@ -77,21 +77,33 @@
                 </div>
 
                 <!-- Monitoring Wall -->
-                <div class="product-card reveal reveal-delay-2">
-                    <div class="product-icon">🖼️</div>
-                    <h3>Monitoring Wall</h3>
-                    <ul class="product-features">
-                        <li>Real-time video proof of intrusion</li>
-                        <li>Reference image comparison (e.g., license plates)</li>
-                        <li>Interactive site map with marked areas</li>
-                        <li>Historical data search capability</li>
-                        <li>Incident timeline tracking</li>
-                        <li>Seamless escalation process</li>
-                    </ul>
+                <div class="product-card reveal reveal-right reveal-delay-2 highlight-card">
+                    <div class="product-content-wrap">
+                        <div class="product-icon">🖼️</div>
+                        <h3>Monitoring Wall</h3>
+                        <ul class="product-features">
+                            <li>Real-time video proof of intrusion</li>
+                            <li>Reference image comparison (e.g., license plates)</li>
+                            <li>
+                                <div class="feature-block">
+                                    <span class="feature-head">Interactive Site Map</span>
+                                    <span class="feature-info">Explore active cameras, identify zones, and view live
+                                        perspectives on a detailed site survey map.</span>
+                                    <div class="feature-image-wrapper" style="margin-top: 16px;">
+                                        <img src="/images/site-survey.png" alt="Interactive Site Survey Map"
+                                            class="card-image-md site-survey-img">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>Historical data search capability</li>
+                            <li>Incident timeline tracking</li>
+                            <li>Seamless escalation process</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Level 1 Agent Workflow -->
-                <div class="product-card reveal reveal-delay-1">
+                <div class="product-card reveal reveal-left reveal-delay-3">
                     <div class="product-icon">👤</div>
                     <h3>Level 1 Agent Workflow</h3>
                     <ul class="product-features">
@@ -104,7 +116,7 @@
                 </div>
 
                 <!-- Level 2 Agent Oversight -->
-                <div class="product-card reveal reveal-delay-2">
+                <div class="product-card reveal reveal-right reveal-delay-4">
                     <div class="product-icon">👥</div>
                     <h3>Level 2 Agent Oversight</h3>
                     <ul class="product-features">
@@ -118,7 +130,7 @@
                 </div>
 
                 <!-- Human Performance Module -->
-                <div class="product-card reveal reveal-delay-1">
+                <div class="product-card reveal reveal-left reveal-delay-5">
                     <div class="product-icon">📈</div>
                     <h3>Human Performance Module</h3>
                     <ul class="product-features">
@@ -133,9 +145,6 @@
 
                 <!-- Metrics & Dashboarding -->
                 <div class="product-card reveal reveal-delay-2 highlight-card">
-                    <div class="feature-image-wrapper grafana-hero">
-                        <img src="/images/grafana.png" alt="Grafana Security Dashboard">
-                    </div>
                     <div class="product-content-wrap">
                         <div class="product-icon">📊</div>
                         <h3>Advanced Analytics</h3>
@@ -146,6 +155,9 @@
                                     <span class="feature-info">Unified visualization of camera health, threat metrics,
                                         and operational
                                         efficiency</span>
+                                    <div class="feature-image-wrapper grafana-hero" style="margin-top: 16px;">
+                                        <img src="/images/grafana.png" alt="Grafana Security Dashboard">
+                                    </div>
                                 </div>
                             </li>
                             <li>

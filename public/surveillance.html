@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <div class="tech-grid-overlay"></div>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
@@ -40,7 +41,7 @@
     <!-- ===== BACK TO HOME ===== -->
     <div class="back-to-home">
         <div class="container">
-            <a href="/" class="back-home-link">
+            <a href="/#about" class="back-home-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="m12 19-7-7 7-7" />
@@ -52,19 +53,19 @@
     </div>
 
     <!-- ===== AI-BASED SURVEILLANCE ===== -->
-    <section class="section" id="surveillance">
+    <section class="section section-highlight" id="surveillance">
         <div class="container">
-            <div class="reveal">
+            <div class="reveal reveal-up">
                 <span class="section-label">AI-Based Surveillance</span>
-                <h2 class="section-title">From Traditional Cameras<br>to Intelligent Surveillance</h2>
+                <h2 class="section-title">From Traditional Cameras<br>to <span class="gradient-text">Intelligent
+                        Surveillance</span></h2>
                 <p class="section-desc">
                     Our Sirius camera system replaces traditional setups with pure customization,
                     zero blindspots, and smart analytics, powered by an integrated server rack.
                 </p>
             </div>
-
             <!-- Sirius vs Traditional Comparison -->
-            <div class="comparison-section reveal reveal-delay-1">
+            <div class="comparison-section reveal reveal-up reveal-delay-2">
                 <div class="comparison-card">
                     <h4>Traditional Cameras</h4>
                     <p class="card-sub">Legacy surveillance limitations</p>
@@ -96,32 +97,38 @@
             </div>
 
             <!-- Server Rack -->
-            <div class="product-card reveal reveal-delay-2" style="margin-top: 32px;">
-                <div class="product-icon">🖧</div>
+            <div class="product-card reveal reveal-scale reveal-delay-3" style="margin-top: 32px;">
+                <div class="product-icon"
+                    style="font-size: 2.2rem; margin-bottom: 24px; color: var(--accent-cyan); filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="3" width="20" height="8" rx="2" stroke="currentColor" stroke-width="2" />
+                        <rect x="2" y="13" width="20" height="8" rx="2" stroke="currentColor" stroke-width="2" />
+                        <path d="M6 7H6.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        <path d="M10 7H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M6 17H6.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        <path d="M10 17H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <circle cx="19" cy="7" r="1" fill="currentColor" />
+                        <circle cx="19" cy="17" r="1" fill="currentColor" />
+                    </svg>
+                </div>
                 <h3>Server Rack</h3>
                 <p>Integrated server infrastructure powering AI analytics and network security for your surveillance
-                    deployment.
-                </p>
-                <ul class="product-features">
-                    <li>
-                        <div class="feature-block">
-                            <span class="feature-head">Edge Analytics</span>
-                            <span class="feature-info">Core computing power for real-time video processing</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="feature-block">
-                            <span class="feature-head">Data Infrastructure</span>
-                            <span class="feature-info">Enterprise-grade security and full data redundancy</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="feature-block">
-                            <span class="feature-head">Performance Optimized</span>
-                            <span class="feature-info">Designed for high-speed, low-latency stream management</span>
-                        </div>
-                    </li>
-                </ul>
+                    deployment.</p>
+                <div class="product-features"
+                    style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="feature-block">
+                        <span class="feature-head">Edge Analytics</span>
+                        <span class="feature-info">Core computing power for real-time video processing</span>
+                    </div>
+                    <div class="feature-block">
+                        <span class="feature-head">Data Infrastructure</span>
+                        <span class="feature-info">Enterprise-grade security and full data redundancy</span>
+                    </div>
+                    <div class="feature-block">
+                        <span class="feature-head">Performance Optimized</span>
+                        <span class="feature-info">Designed for high-speed, low-latency stream management</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Category Tabs for AI Capabilities -->
