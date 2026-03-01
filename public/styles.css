@@ -1265,17 +1265,18 @@ img {
 }
 
 .card-image-sm {
-  width: 100% !important;
-  height: 220px !important;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  filter: none;
+}
+
+.card-image-cover {
   object-fit: cover !important;
-  object-position: center 25% !important;
-  /* Move up to crop out bottom logos/branding */
-  background: #000;
-  /* Solid black to mask any white edges of the source image */
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  filter: brightness(0.9) contrast(1.1);
-  /* Make it look more integrated */
 }
 
 .drone-image-sm {
