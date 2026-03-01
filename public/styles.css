@@ -1211,6 +1211,29 @@ img {
   flex-shrink: 0;
 }
 
+/* Feature Row for Custom Page */
+.feature-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  margin-top: 40px;
+  justify-items: center;
+}
+
+@media (max-width: 992px) {
+  .feature-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
 /* Feature Image styles */
 .feature-image-wrapper {
   margin: 16px 0;
@@ -2271,8 +2294,8 @@ img {
   }
 
   .about-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
   .about-glass-brand {
